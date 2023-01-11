@@ -50,7 +50,7 @@ class MainFragment : Fragment() {
         checkPermission()
         init()
         updateCurrentCard()
-        requestWeatherData("London")
+        requestWeatherData("Berlin")
     }
 
     private fun init() = with(binding){
@@ -66,10 +66,10 @@ class MainFragment : Fragment() {
             val maxMinTemp = "${it.maxTemp}°C / ${it.minTemp}°C"
             tvData.text = it.time
             tvCity.text = it.city
-            tvCurrentTemp.text = it.currentTemp
+            tvCurrentTemp.text = "${it.currentTemp}°C"
             tvCondition.text = it.condition
             tvMaxMin.text = maxMinTemp
-            Picasso.get().load(it.imageUrl).into(ImWeather)
+            Picasso.get().load("https:" + it.imageUrl).into(ImWeather)
         }
     }
 
@@ -148,14 +148,14 @@ class MainFragment : Fragment() {
         )
         model.liveDataCurrent.value = item
 
-        Log.d("MyLog", "City: ${item.city}")
-        Log.d("MyLog", "Time: ${item.time}")
-        Log.d("MyLog", "Condition: ${item.condition}")
-        Log.d("MyLog", "Temp: ${item.currentTemp}")
-        Log.d("MyLog", "Url: ${item.imageUrl}")
-        Log.d("MyLog", "Url: ${item.maxTemp}")
-        Log.d("MyLog", "Url: ${item.minTemp}")
-        Log.d("MyLog", "Url: ${item.hours}")
+//        Log.d("MyLog", "City: ${item.city}")
+//        Log.d("MyLog", "Time: ${item.time}")
+//        Log.d("MyLog", "Condition: ${item.condition}")
+//        Log.d("MyLog", "Temp: ${item.currentTemp}")
+//        Log.d("MyLog", "Url: ${item.imageUrl}")
+//        Log.d("MyLog", "Url: ${item.maxTemp}")
+//        Log.d("MyLog", "Url: ${item.minTemp}")
+//        Log.d("MyLog", "Url: ${item.hours}")
     }
 
     companion object {
