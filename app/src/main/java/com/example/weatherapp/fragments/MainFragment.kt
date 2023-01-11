@@ -131,7 +131,7 @@ class MainFragment : Fragment() {
             )
             list.add(item)
         }
-
+        model.liveDataList.value = list
         return list
     }
 
