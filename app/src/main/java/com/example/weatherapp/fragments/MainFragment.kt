@@ -1,7 +1,6 @@
 package com.example.weatherapp.fragments
 
 import android.Manifest
-import android.app.DownloadManager.Request
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -14,7 +13,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.FragmentActivity
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.example.weatherapp.R
 import com.example.weatherapp.adapters.VpAdapter
 import com.example.weatherapp.adapters.WeatherModel
 import com.example.weatherapp.databinding.FragmentMainBinding
@@ -73,7 +71,7 @@ class MainFragment : Fragment() {
     }
 
     private fun requestWeatherData(city: String) {
-        var url = "https://api.weatherapi.com/v1/forecast.json?" +
+        val url = "https://api.weatherapi.com/v1/forecast.json?" +
                 "key=$API_KEY&q=$city&days=3&aqi=no&alerts=no"
 
         val queue = Volley.newRequestQueue(context)
@@ -94,23 +92,53 @@ class MainFragment : Fragment() {
 
     private fun parseWeatherData(result: String) {
         val mainObject = JSONObject(result)
+        val list = parseDays(mainObject)
+        parseCurrentData(mainObject, list[0])
+    }
+
+    private fun parseDays(mainObject: JSONObject): List<WeatherModel> {
+        val list = ArrayList<WeatherModel>()
+        val daysArray = mainObject.getJSONObject("forecast").getJSONArray("forecastday")
+        val name = mainObject.getJSONObject("location").getString("name")
+        for (i in 0 until daysArray.length()) {
+            val day = daysArray[i] as JSONObject
+            val item = WeatherModel(
+                name,
+                day.getString("date"),
+                day.getJSONObject("day").getJSONObject("condition").getString("text"),
+                "",
+                day.getJSONObject("day").getString("maxtemp_c"),
+                day.getJSONObject("day").getString("mintemp_c"),
+                day.getJSONObject("day").getJSONObject("condition").getString("icon"),
+                day.getJSONArray("hour").toString()
+            )
+            list.add(item)
+        }
+
+        return list
+    }
+
+    private fun parseCurrentData(mainObject: JSONObject, weatherItem: WeatherModel) {
         val item = WeatherModel(
             mainObject.getJSONObject("location").getString("name"),
             mainObject.getJSONObject("current").getString("last_updated"),
             mainObject.getJSONObject("current").getJSONObject("condition").getString("text"),
             mainObject.getJSONObject("current").getString("temp_c"),
-            "",
-            "",
+            weatherItem.maxTemp,
+            weatherItem.minTemp,
             mainObject.getJSONObject("current").getJSONObject("condition").getString("icon"),
-            ""
+            weatherItem.hours
         )
         Log.d("MyLog", "City: ${item.city}")
         Log.d("MyLog", "Time: ${item.time}")
         Log.d("MyLog", "Condition: ${item.condition}")
         Log.d("MyLog", "Temp: ${item.currentTemp}")
         Log.d("MyLog", "Url: ${item.imageUrl}")
-
+        Log.d("MyLog", "Url: ${item.maxTemp}")
+        Log.d("MyLog", "Url: ${item.minTemp}")
+        Log.d("MyLog", "Url: ${item.hours}")
     }
+
     companion object {
         @JvmStatic
         fun newInstance() = MainFragment()

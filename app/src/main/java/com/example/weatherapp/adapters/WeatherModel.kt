@@ -1,5 +1,7 @@
 package com.example.weatherapp.adapters
 
+import org.json.JSONObject
+
 data class WeatherModel(
     val city: String,
     val time: String,
