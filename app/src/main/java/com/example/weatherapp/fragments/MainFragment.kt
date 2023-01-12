@@ -81,6 +81,17 @@ class MainFragment : Fragment() {
             tabLayout.selectTab(tabLayout.getTabAt(0))
             checkLocation()
         }
+        ibSearch.setOnClickListener{
+            DialogManager.searchByNameDialog(requireContext(), object : DialogManager.Listener{
+                override fun onClick(name: String?) {
+//                  Log.d("MyLog", "Name: $name")
+                    if (name != null) {
+                        requestWeatherData(name)
+                    }
+                }
+
+            })
+        }
     }
 
     private fun checkLocation() {
@@ -88,7 +99,7 @@ class MainFragment : Fragment() {
             getLocation()
         } else {
             DialogManager.locationSettingsDialog(requireContext(), object : DialogManager.Listener{
-                override fun onClick() {
+                override fun onClick(name: String?) {
                     startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
                 }
             })
