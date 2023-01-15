@@ -41,30 +41,26 @@
                 android:id="@+id/tvData"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="12dp"
                 android:fontFamily="@font/montserrat"
                 android:text="20/07/2022 13:00"
+                android:textColor="@color/white"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/ImWeather"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/ic_launcher_foreground"
-                app:layout_constraintEnd_toEndOf="parent" />
 
             <TextView
                 android:id="@+id/tvCity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
                 android:fontFamily="@font/montserrat"
-                android:text="Madrid"
+                android:text="Moscow"
                 android:textColor="@color/design_default_color_background"
                 android:textSize="24dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.016"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ImWeather" />
 
@@ -72,11 +68,15 @@
                 android:id="@+id/tvCurrentTemp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="12dp"
                 android:fontFamily="@font/montserrat"
-                android:text="20°C"
+                android:text="27°C"
                 android:textColor="@color/design_default_color_background"
-                android:textSize="60dp"
+                android:textSize="74dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.021"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvCity" />
 
@@ -84,47 +84,57 @@
                 android:id="@+id/tvCondition"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginBottom="5dp"
                 android:fontFamily="@font/montserrat"
                 android:text="Sunny"
                 android:textColor="@color/design_default_color_background"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvCurrentTemp" />
+                app:layout_constraintBottom_toTopOf="@+id/tvMaxMin"
+                app:layout_constraintStart_toEndOf="@+id/tvCurrentTemp" />
 
             <TextView
                 android:id="@+id/tvMaxMin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginBottom="25dp"
                 android:fontFamily="@font/montserrat"
                 android:text="34°C/ 15°C"
                 android:textColor="@color/design_default_color_background"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvCondition" />
+                app:layout_constraintBottom_toBottomOf="@+id/tvCurrentTemp"
+                app:layout_constraintStart_toEndOf="@+id/tvCurrentTemp" />
 
             <ImageButton
                 android:id="@+id/ibSearch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginStart="15dp"
                 android:background="@null"
                 android:src="@drawable/ic_search"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvMaxMin" />
+                app:layout_constraintBottom_toBottomOf="@+id/tvCity"
+                app:layout_constraintStart_toEndOf="@+id/tvCity"
+                app:layout_constraintTop_toTopOf="@+id/tvCity" />
 
             <ImageButton
                 android:id="@+id/ibSync"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="25dp"
                 android:background="@null"
                 android:src="@drawable/ic_baseline_cloud_sync_24"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/tvCurrentTemp"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <ImageView
+                android:id="@+id/ImWeather"
+                android:layout_width="27dp"
+                android:layout_height="31dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_launcher_foreground"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvMaxMin" />
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
